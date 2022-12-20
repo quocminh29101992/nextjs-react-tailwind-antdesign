@@ -10,6 +10,7 @@ const inter = Inter({ subsets: ['latin'] })
 import React, { useEffect, useRef } from "react";
 import Router from 'next/router'
 
+
 export default function Home() {
 
   useEffect(() => {
@@ -19,17 +20,15 @@ export default function Home() {
         // with router.push the page may be added to history
         // the browser on history back will  go back to this page and then forward again to the redirected page
         // you can prevent this behaviour using location.replace
-        Router.push('/v1/home')
-       //location.replace("/hello-nextjs")
+        Router.push('/home')
+       location.replace("/home")
     }
   } 
   )
 
   return (
     <>
-      <main>
-
-      </main>
+ 
     </>
   );
 }

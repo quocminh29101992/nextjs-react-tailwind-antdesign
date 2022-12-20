@@ -1,21 +1,22 @@
 import { useEffect } from 'react';
-import { getTodoList } from '../../../services/v1/task'
+import { getTodoList } from '../../services/v1/task'
 import React, { useState } from 'react';
 import QRCode from "react-qr-code";
+import { useDispatch, useSelector } from "react-redux";
+import { getTodoListAction } from '../../redux/slices/taskSlice'
 
 
 export default function Home() {
 
-  const [tasks, setTasks] = useState([]);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
 
-    getTodoList().then(res => res.json()).then(
-      (result) => {
-        // console.log(result)
-        setTasks(result)
-      })
+  const tasks = useSelector((state) => state.tasks.taskList)
+  
+  useEffect( () => {
+    dispatch(getTodoListAction())
   }, [])
+
 
 
 
@@ -33,7 +34,7 @@ export default function Home() {
             // includeMargin={true}
           />
     </div>
-      {tasks.map(task => (
+      {tasks && tasks.map(task => (
         <li key={task.id} className='p-4'>id : {task.id} - {task.title} - status :
           {task.completed}
           {task.completed &&
